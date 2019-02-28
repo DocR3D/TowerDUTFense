@@ -34,6 +34,8 @@ public class Level {
     Level thisLevel;
     static MediaPlayer mediaPlayer;
 
+    public static ArrayList<Projectile> allTheProjectile = new ArrayList<Projectile>();
+
 
 
 
@@ -123,7 +125,6 @@ public class Level {
                     uneCase.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
                             if(joueur.getMoney()>= 25){
                                 joueur.looseMoney(25);
                                 joueur.updateText();
@@ -153,7 +154,6 @@ public class Level {
         ajouterEnnemy();
         finRound = false;
         handler.postDelayed(runnableCode, 50);
-
     }
     private Runnable runnableCode = new Runnable() {
         @Override
