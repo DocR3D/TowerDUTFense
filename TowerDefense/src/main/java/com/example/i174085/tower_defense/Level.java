@@ -175,6 +175,7 @@ public class Level {
                 for(Ennemy unEnnemy : new ArrayList<Ennemy>(ennemies)){
                     if(nbTick%3 == 0){
                         isTakingDommage = uneTourelle.Attack(unEnnemy);
+                        if(isTakingDommage) break;
                     }
                 }
             }

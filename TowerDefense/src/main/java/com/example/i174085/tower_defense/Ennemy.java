@@ -16,13 +16,14 @@ public class Ennemy {
     int X;
     int Y;
     MediaPlayer mediaPlayer;
+    RelativeLayout laMap;
 
     public Ennemy(int vie, Context pContext, RelativeLayout laMap, int X, int Y) {
         this.vie = vie;
         vieMax = vie;
         this.X = X;
         this.Y = Y;
-
+        this.laMap = laMap;
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(100, 100);
 
         unEnnemy = new ImageView(pContext);
@@ -34,7 +35,7 @@ public class Ennemy {
 
         unEnnemy.setX(X);
         unEnnemy.setY(Y);
-        laMap.addView(unEnnemy);
+        this.laMap.addView(unEnnemy);
     }
 
     public void deplacer(int[][] map){

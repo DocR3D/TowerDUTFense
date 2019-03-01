@@ -26,12 +26,12 @@ public class Tourelle {
         this.leContext = leContext;
         this.X = X*100;
         this.Y = Y*100;
-
+        this.laMap = laMap;
         uneCase.setBackgroundResource(R.drawable.tourellelvlun);
         uneCase.setLayoutParams(params);
         uneCase.setX(X*100);
         uneCase.setY(Y*100);
-        laMap.addView(uneCase);
+        this.laMap.addView(uneCase);
 
         uneCase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +60,7 @@ public class Tourelle {
 
     public boolean Attack(Ennemy theEnnemy){
         if(checkEnnemyInRange(theEnnemy)){
-            Level.allTheProjectile.add(new Projectile(X,Y,damage,theEnnemy));
+            Level.allTheProjectile.add(new Projectile(X,Y,damage,theEnnemy, leContext, laMap));
             return true;
         }
         return false;
