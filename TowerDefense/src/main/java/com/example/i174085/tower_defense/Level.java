@@ -25,7 +25,7 @@ public class Level {
     static ArrayList<Ennemy> ennemies = new ArrayList();
     static ArrayList<Tourelle> Tourelles = new ArrayList<>();
     Handler handler = new Handler();
-    int nbEnnemy = 7;
+    int nbEnnemy = 0;
     int vieEnnemy = 20;
     boolean finRound = false;
     int nbEnnemyOnBoard = 0;
@@ -174,13 +174,17 @@ public class Level {
                 boolean isTakingDommage=false;
                 for(Ennemy unEnnemy : new ArrayList<Ennemy>(ennemies)){
                     if(nbTick%3 == 0){
-                        isTakingDommage = unEnnemy.takeDamage(uneTourelle);
-                        if(isTakingDommage) break;
+                        isTakingDommage = uneTourelle.Attack(unEnnemy);
                     }
                 }
-
-
             }
+            ArrayList<Projectile> toDestroy = new ArrayList();
+            for(Projectile aProjectile : allTheProjectile){
+                aProjectile.goToNextPosition();
+                if(aProjectile.isDestroyed)  toDestroy.add(aProjectile);
+            }
+            allTheProjectile.remove(toDestroy);
+
             if(finRound && ennemies.size()==0) {
                 if(joueur.getVague() < 15) {
                     nbEnnemy = nbEnnemy + 1 ;

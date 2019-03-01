@@ -58,10 +58,12 @@ public class Tourelle {
         }
     }
 
-    public void Attack(Ennemy theEnnemy){
+    public boolean Attack(Ennemy theEnnemy){
         if(checkEnnemyInRange(theEnnemy)){
             Level.allTheProjectile.add(new Projectile(X,Y,damage,theEnnemy));
+            return true;
         }
+        return false;
 
     }
     private boolean checkEnnemyInRange(Ennemy theEnnemy){

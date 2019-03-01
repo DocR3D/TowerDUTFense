@@ -1,5 +1,6 @@
 package com.example.i174085.tower_defense;
 
+import android.os.Debug;
 import android.util.Log;
 
 public class Projectile {
@@ -8,13 +9,14 @@ public class Projectile {
     float positionX;
     float positionY;
 
-
     float positionFinaleX;
     float positionFinaleY;
 
     int damage;
 
     Ennemy target;
+
+    boolean isDestroyed = false;
 
     public Projectile(float positionX, float positionY, int damage, Ennemy target) {
         this.positionX = positionX;
@@ -26,15 +28,25 @@ public class Projectile {
     }
 
     public void goToNextPosition(){
-        if(positionX-positionFinaleX>0) {
-            positionY = functionXtoY(positionX + 1);
-            positionX = positionX + 1;
+        if (Level.ennemies.contains(target)) {
+            positionFinaleX = target.getX();
+            positionFinaleY = target.getY();
+
+        if(positionX-positionFinaleX<0) {
+            positionY = functionXtoY(positionX + 50);
+            positionX = positionX + 50;
         }else{
-            positionY = functionXtoY(positionX - 1);
-            positionX = positionX - 1;
+            positionY = functionXtoY(positionX - 50);
+            positionX = positionX - 50;
         }
-        if(distanceFromAtoB() < 0.05){
+        if(distanceFromAtoB() < 50){
+            this.inflictDamage();
+        }}else{
+            isDestroyed = true;
         }
+        Log.e("couou", "positionX : " + positionX + "PositionY : " + positionY);
+        Log.e("couou", "positionFinalX : " + positionFinaleX + "PositionFinalY : " + positionFinaleY);
+
     }
 
     public float functionXtoY(float x){
@@ -43,15 +55,13 @@ public class Projectile {
        float y = a*x + b;
        return y;
     }
-    public float functionYtoX(float y){
-        float a = (positionX - positionY)/(positionFinaleX-positionFinaleY);
-        float b = positionY - positionX * a;
-        float x = (y-b)/a;
-        return x;
-    }
 
     public double distanceFromAtoB(){
         return Math.sqrt(Math.pow(positionFinaleX- positionX,2) + Math.pow(positionFinaleY - positionFinaleX,2));
+    }
+
+    public void inflictDamage(){
+        target.takeDamage(damage);
     }
 
 

@@ -58,14 +58,6 @@ public class Ennemy {
         Y = i*100;
     }
 
-    public boolean takeDamage(Tourelle uneTourelle){
-        if(Math.sqrt((X- uneTourelle.getX())*(X- uneTourelle.getX()) + (Y - uneTourelle.getY())*(Y - uneTourelle.getY())) <= uneTourelle.getRange()){
-            vie = vie - uneTourelle.getDamage();
-            if(vie<vieMax/1.25) unEnnemy.setBackgroundResource(R.drawable.ennemy2);
-            if(vie<vieMax/2) unEnnemy.setBackgroundResource(R.drawable.ennemy3);
-            return true;
-        }else return false;
-    }
 
     public float getX()
     {
@@ -102,6 +94,11 @@ public class Ennemy {
         }
 
 
+    }
+    public void takeDamage(int damage){
+        vie = vie - damage;
+        if(vie<vieMax/1.25) unEnnemy.setBackgroundResource(R.drawable.ennemy2);
+        if(vie<vieMax/2) unEnnemy.setBackgroundResource(R.drawable.ennemy3);
     }
 
 }
